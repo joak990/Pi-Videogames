@@ -1,0 +1,10 @@
+.containerNotFound{
+  
+    display: flex;
+    justify-content: center;
+  align-items: center;
+  }
+  
+  .notFound{
+  width: 100%;
+  }

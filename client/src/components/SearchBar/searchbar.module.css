@@ -1,0 +1,29 @@
+
+.searchinput{
+width: 120px;
+max-width: 400px;
+margin-top: 15px;
+margin-left: 25px;
+padding: 0 16px;
+font-size: 16px;
+color: #fff;
+border-radius: 14px;
+border: none;
+border-bottom: 2px solid #fff;
+outline: none;
+transition: border-bottom-color 0.2s ease-in-out;
+}
+
+.searchinput:focus {
+border-bottom-color: #66C0F4;
+}
+
+
+.btnsearch {
+    background-color: rgb(153, 250, 74);
+    border: none;
+    width: 70px;
+    height: 25px;
+    color: #0b0b0b;
+    border-radius: 25px;
+}

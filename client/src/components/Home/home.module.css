@@ -1,0 +1,31 @@
+.filters{
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    width: auto;
+}
+
+.filters>select{
+    text-align: center;
+    height: 26px;
+   width: 150px;
+   background-color: rgb(220, 220, 10)
+}
+
+
+
+.containernav{
+   max-width: 1500px;
+   height: 200px;
+  
+    display: flex;
+    justify-content: center;
+    
+}
+
+.button1{
+width: 100px;
+
+
+}
+
