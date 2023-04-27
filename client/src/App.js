@@ -1,5 +1,5 @@
 import "./App.css";
-import { BrowserRouter, Routes, Route} from "react-router-dom";
+import { BrowserRouter,Routes,Route} from "react-router-dom";
 import NotFound from "./components/NotFound";
 import Home from "./components/Home/Home";
 import Detail from "./components/Detail/Detail";
@@ -10,11 +10,11 @@ function App() {
       <BrowserRouter>
         
         <Routes>
-          <Route path="/" element={<LandingPage />} />
-          <Route path="/home" element={<Home />} />
-          <Route path="/videogames/:id" element={<Detail />} />
+          <Route path="/" element={<LandingPage/>}/>
+          <Route path="/home" element={<Home/>}/>
+          <Route path="/videogames/:id" element={<Detail/>}/>
           <Route path="/videogames"/>
-          <Route path="*" element={<NotFound />} />
+          <Route path="*" element={<NotFound/>}/>
         </Routes>
       </BrowserRouter>
     </div>

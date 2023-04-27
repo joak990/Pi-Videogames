@@ -6,7 +6,7 @@ function Home() {
   return (
     <div>
       <div className={style.containernav}>
-       
+       <SearchBar/>
         <Link to={"/"}>
           <button className={style.button1}>Go to initial page</button>
         </Link>
@@ -15,8 +15,8 @@ function Home() {
         </Link>
         </div>
       <div className={style.filters}> 
-       <select >
-       <option value="DEFAULT" >By Genre</option>
+       <select>
+       <option value="DEFAULT">By Genre</option>
         <option value=""></option>
         <option value=""></option>
        </select>
