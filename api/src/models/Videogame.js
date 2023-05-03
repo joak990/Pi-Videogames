@@ -13,7 +13,7 @@ module.exports = (sequelize) => {
       type: DataTypes.UUID,
       allowNull: false,
       primaryKey: true,
-      defaultValue: UUIDV4
+      defaultValue: DataTypes.UUIDV4
     },
     description: {
       type: DataTypes.STRING,
@@ -42,6 +42,12 @@ module.exports = (sequelize) => {
         allowNull:false,
         defaultValue: true,
       },
+      //genre:  {
+        //type: DataTypes.ARRAY(DataTypes.JSONB
+          //),
+        //allowNull: false,
+        //defaultValue: [],
+     // },
     
   },{timestamps:false});
 };

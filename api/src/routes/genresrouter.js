@@ -1,14 +1,8 @@
-const { Router} = require ("express")
+const {Router} = require("express");
+const genresRoutes = Router();
+const {getGenresHandler} = require("../Handlers/genresHandlers")
 
-const GenresRouter = Router()
-
-
-
-GenresRouter.get("/",(req,res)=>{
-    res.send("aqui todos los generos")
-})
+genresRoutes.get("/", getGenresHandler);
 
 
-
-
-module.exports =GenresRouter
+module.exports = genresRoutes;

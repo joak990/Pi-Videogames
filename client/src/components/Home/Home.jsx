@@ -1,19 +1,11 @@
 import React from "react";
-import SearchBar from "../SearchBar/SearchBar";
-import { Link } from "react-router-dom";
 import style from './home.module.css'
+import Cards from "../Cards/Cards";
+import SearchBar from "../SearchBar/SearchBar";
 function Home() {
   return (
     <div>
-      <div className={style.containernav}>
-       <SearchBar/>
-        <Link to={"/"}>
-          <button className={style.button1}>Go to initial page</button>
-        </Link>
-        <Link to={"/createvideogame"}>
-        <button>Create New Game</button>
-        </Link>
-        </div>
+    <SearchBar/>
       <div className={style.filters}> 
        <select>
        <option value="DEFAULT">By Genre</option>
@@ -36,6 +28,7 @@ function Home() {
         <option value="">Created</option>
        </select>
       </div>
+      <Cards></Cards>
     </div>
   );
 }
