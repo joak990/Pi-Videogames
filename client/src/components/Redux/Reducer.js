@@ -1,12 +1,11 @@
-import { DELETE_GAME, FILTER_BY_GENRE, GET_DETAIL, GET_GAMES_BY_NAME, GET_GENRES, GET_PLATAFORMS, GET_VIDEO_GAMES, ORDER_BY_NAME, ORDER_BY_RATING, SUBMIT_GAME } from "./Types";
+import { CLEAN_DETAIL_VIDEOGAME,DELETE_GAME, FILTER_BY_GENRE, GET_DETAIL, GET_GAMES_BY_NAME, GET_GENRES, GET_PLATFORMS, GET_VIDEO_GAMES, ORDER_BY_NAME, ORDER_BY_RATING, SUBMIT_GAME } from "./Types";
 
 const initialState = {
   videogames: [],
   allVideoGames: [],
   genres: [],
-  platform: [],
+  platforms: [],
   resPost: [],
-  createInDb: [],
   videoGamesdetails: [],
   };
 
@@ -18,14 +17,13 @@ export default function rootReducer(state = initialState, action){
   case GET_VIDEO_GAMES:
     return {
       ...state,
-      videogames: action.payload,
       allVideoGames: action.payload,
     };
 
     case GET_GAMES_BY_NAME:
       return {
         ...state,
-        videogames: action.payload,
+        allVideoGames: action.payload,
       };
       case GET_GENRES:
         return {
@@ -33,10 +31,10 @@ export default function rootReducer(state = initialState, action){
           genres: action.payload,
         };
        
-        case GET_PLATAFORMS:
+        case GET_PLATFORMS:
       return {
         ...state,
-        plataform: action.payload,
+        platforms: action.payload,
       };
 
       case FILTER_BY_GENRE:
@@ -64,6 +62,11 @@ export default function rootReducer(state = initialState, action){
           videoGamesdetails: action.payload,
         };
        
+        case CLEAN_DETAIL_VIDEOGAME:
+          return{
+            ...state,
+              videogamesDetails: {}}
+
         case DELETE_GAME:
           return{
             ...state

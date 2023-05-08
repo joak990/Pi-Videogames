@@ -1,4 +1,57 @@
 .imagecontainer{
     width: 400px;
-    max-height: 220px;
+    max-height: 214px;
+    margin-top: 10px;
+    border-radius: 15px;
 }
+
+
+.containercard{
+    border: solid 1px rgb(34, 33, 35);
+    background-color: black;
+    height: 340px;
+    border-radius: 15px;
+}
+
+.pimage{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: floralwhite;
+    font-weight: 300;
+    font-size: 17px;
+    font-family:fantasy;
+
+
+}
+
+.navlink{
+    text-decoration: none;
+}
+
+.genres{
+    display: flex;
+    gap: 30px;
+    justify-content: center;
+    
+    border-radius: 15px;
+
+    
+
+}
+
+.pgenre{
+    animation: color-change 2s linear infinite;
+}
+
+@keyframes color-change {
+    0% {
+      color: aliceblue;
+    }
+    50% {
+      color: rgb(42, 13, 207);
+    }
+    100% {
+      color: aliceblue;
+    }
+  }

@@ -1,0 +1,184 @@
+.containerdeta{
+    background-color: black;
+}
+.containerdetail{
+    border: solid 1px rgb(34, 33, 35);
+   background-color: black;
+    margin-top: 50px;
+   height: 1000px;
+    border-radius: 15px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+.titledetail{
+    display: flex;
+    justify-content: center;
+    color: white;
+    font-size: 40px;
+}
+.idrender{
+    display: flex;
+justify-content: center;
+    font-size: large;
+    color: red;
+    font-weight: 300px;
+    font-family: fantasy;
+}
+.idtext{
+    color: white;
+    
+}
+.idDetail{
+display: flex;
+justify-content: center;
+color: beige;
+
+}
+.namecont{
+    margin-top: 30px;
+    display: flex;
+    justify-content: center;
+    color: white;
+}
+
+.idcont{
+    display: flex;
+    justify-content: center;
+    font-size: large;
+    font-weight: 300px;
+}
+
+.namedetail{
+display: flex;
+justify-content: center;
+align-items: center;
+text-align: center;
+}
+
+.imagedetail{
+    
+    width: 670px;
+    max-height: 700px;
+    margin-top: 10px;
+    border-radius: 15px;
+    border: solid 3px rgb(165, 159, 159) ;
+}
+
+.imagedetail2{
+    
+    width: 400px;
+    max-height: 290px;
+    margin-top: 10px;
+    border-radius: 15px;
+}
+.containerimagee{
+display: flex;
+justify-content: center;
+}
+
+.genresdetail{
+    display: flex;
+    justify-content: center;
+   color: aliceblue;
+}
+
+.descriptiondetail{
+    display: flex;
+    justify-content: center;
+ color: white;
+ margin-top: 160px;
+}
+.descriptionreal{
+    color: white;
+}
+
+.containeruls{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.platforms{
+    display: flex;
+    justify-content: center;
+   color: red;
+    flex-direction: column;
+    align-items: center;
+    font-weight: 300px;
+    font-family: fantasy;
+}
+.platformscontainer{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.cont{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.ratingrender{
+    display: flex;
+    justify-content: center;
+  color: red;
+font-size: x-large;
+font-weight: 300px;
+font-family: fantasy;
+   
+}
+
+.containerbuttons{
+   display: flex;
+   justify-content: flex-end;
+    margin-right: 40px;
+    position: fixed;
+    bottom: 50px;
+    right: 20px;
+}
+
+
+.containergenres{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+
+    height: 500px;
+}
+.contgenres{
+    display: flex;
+    justify-content: center;
+    color: white;
+    font-size: large;
+    font-weight: 300px;
+    font-family: fantasy;
+}
+.release{
+    display: flex;
+    justify-content: center;
+    color: white;
+    font-weight: 300px;
+    font-family: fantasy;
+}
+
+.contid{
+    display: flex;
+    justify-content: center;
+}
+
+.buttonscontainer{
+    border-radius: 15px;
+    width: 150px;
+    height: 24px;
+    background-color: #e74c3c;
+    color: white;
+
+}
+
+
+.buttonscontainer:hover {
+    background-color: #c0392b;
+  }
+  

@@ -2,6 +2,21 @@
     display: flex;
     justify-content: center;
     gap: 20px;
-    height: 50px;
-    background-color: bisque; 
+    height: 90px;
+   background-color: rgb(15, 15, 16);
+}
+
+.linksnav{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    color: aliceblue;
+    font-size: xx-large;
+    font-family: fantasy;
+}
+
+.linksnav:hover{
+    color: yellow; /* Cambia el color del texto al pasar el cursor sobre el enlace */
+   background-color: black;
 }

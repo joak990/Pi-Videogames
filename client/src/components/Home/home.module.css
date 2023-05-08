@@ -1,3 +1,15 @@
+.topContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.searchbarContainer {
+    margin: 30px 0px 30px 0px;
+}
+
+
 .filters{
     display: flex;
     justify-content: center;
@@ -9,7 +21,7 @@
     text-align: center;
     height: 26px;
    width: 150px;
-   background-color: rgb(220, 220, 10)
+   background-color:rgb(45, 162, 209)
 }
 
 

@@ -3,7 +3,7 @@ import {
     GET_VIDEO_GAMES,
     GET_GAMES_BY_NAME,
     GET_GENRES,
-    GET_PLATAFORMS,
+    GET_PLATFORMS,
     FILTER_BY_GENRE,
     ORDER_BY_NAME,
     ORDER_BY_RATING,
@@ -11,7 +11,11 @@ import {
     FILTER_CREATED,
     SUBMIT_GAME,
     DELETE_GAME,
-    GET_DETAIL
+    GET_DETAIL,
+   
+ CLEAN_DETAIL_VIDEOGAME,
+   
+    
   
 } from "./Types";
 
@@ -31,7 +35,7 @@ export function getVideoGames() {
   export function getNameVideoGames(name) {
     return function (dispatch) {
       return axios
-        .get(`/videogames?name=${name}`)
+        .get(`http://localhost:3001/videogames?name=${name}`)
         .then((res) => {
           dispatch({ type: GET_GAMES_BY_NAME, payload: res.data });
         })
@@ -55,11 +59,11 @@ export function getVideoGames() {
   }
 
   
-export function getPlataforms() {
+export function getPlatforms() {
     return async function (dispatch) {
       var json = await axios.get("http://localhost:3001/videogames", {});
       return dispatch({
-        type: GET_PLATAFORMS,
+        type: GET_PLATFORMS,
         payload: json.data,
       });
     };
@@ -139,10 +143,11 @@ export function getPlataforms() {
   export const getDetails = (id) => {
     return async function (dispatch) {
       try {
-        let json = await axios.get(`http://localhost:3001/videogames/${id}`);
+        console.log("SOY L ID", id)
+        const response = await axios.get(`http://localhost:3001/videogames/${id}`);
         return dispatch({
           type: GET_DETAIL,
-          payload: json.data,
+          payload: response.data,
         });
       } catch (e) {
         console.log(e);
@@ -163,6 +168,15 @@ export function getPlataforms() {
       });
     }
   }
+
+
+  export function cleanDetail(){
+    return {
+      type: CLEAN_DETAIL_VIDEOGAME,
+    }
+  }
+  
+  
   
   
   

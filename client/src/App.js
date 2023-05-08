@@ -11,7 +11,7 @@ function App() {
 const location = useLocation()  
   return (
     <div>
-      {location.pathname!=="/"&&<NavBar/>}
+      {(location.pathname==="/home" || location.pathname===`/videogames/:id` )&& <NavBar/>}
     
         <Routes>
           <Route path="/" element={<LandingPage/>}/>

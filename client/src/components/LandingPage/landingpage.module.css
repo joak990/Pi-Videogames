@@ -49,3 +49,7 @@
   .loginbutton:hover {
     animation: change-color 1s infinite;
   }
+
+.h1{
+  color: white;
+}
