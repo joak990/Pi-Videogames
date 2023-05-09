@@ -41,3 +41,10 @@ width: 100px;
 
 }
 
+.reset{
+    text-align: center;
+    height: 26px;
+   width: 150px;
+   background-color:rgb(242, 103, 78);
+   color: white;
+}

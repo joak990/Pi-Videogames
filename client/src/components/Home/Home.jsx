@@ -1,48 +1,119 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import style from "./home.module.css";
 import Cards from "../Cards/Cards";
 import SearchBar from "../SearchBar/SearchBar";
-import { useDispatch } from "react-redux";
-import { getVideoGames } from "../Redux/Actions";
+import { useDispatch, useSelector } from "react-redux";
+import { resetfilters,getVideoGames,orderByName,orderByRating,filterCreated, filterVideogamesByGenre } from "../Redux/Actions";
+import Loading from "../Loading/Loading";
 function Home() {
+
+  const [order, setOrder] = useState("");
+  const [loading, setLoading] = useState(true);
+  
+  const{ genres, allVideoGames , videogamesoriginals} = useSelector((state) => state);
+ 
   const dispatch = useDispatch();
 
   useEffect(()=> {
     dispatch(getVideoGames());
-  },[dispatch])
+  },[])
 
+  function handleSort(event) {
+    event.preventDefault();
+    dispatch(orderByName(event.target.value)); //despacho la accion
+    //setCurrentPage(1)
+    setOrder(`Ordenado ${event.target.value}`); //es un estado local vacio, lo uso para modif estado local y renderize
+  }
+  function handleClick() {
+    console.log(videogamesoriginals);
+    console.log(allVideoGames);
+   dispatch(resetfilters())
+  }
+  function handleSortRating(p) {
+    p.preventDefault();
+    dispatch(orderByRating(p.target.value)); //despacho la accion
+   // setCurrentPage(1);
+    setOrder(`Ordenado ${p.target.value}`); //es un estado local vacio, lo uso para modif estado local y renderize
+  }
+  function handlefilterCreated(event) {
+    event.preventDefault();
+    dispatch(filterCreated(event.target.value));
+  }
+  const changeLoading = () => {
+    
+    
+    setTimeout(() => {
+      setLoading(false);
+    }, 1000);
+  };
+
+  if (loading) {
+    changeLoading();
+    return <Loading> cards</Loading>;
+  } else {
   return (
     <div className="home">
       <div className={style.topContainer}>
         <div className={style.searchbarContainer}> <SearchBar/></div>
         <div className={style.filters}>
-          <select>
-            <option value="DEFAULT">By Genre</option>
-            <option value=""></option>
-            <option value=""></option>
-          </select>
-          <select>
-            <option value="DEFAULT">Rating</option>
-            <option value="">High</option>
-            <option value="">Low</option>
-          </select>
-          <select>
-            <option value="DEFAULT">All</option>
-            <option value="">A-Z</option>
-            <option value="">Z-A</option>
-          </select>
-          <select>
-            <option value="DEFAULT">In alphabetical Order</option>
-            <option value="">Alredy Exist</option>
-            <option value="">Created</option>
-          </select>
+        <select
+              defaultValue={"DEFAULT"}
+              className="select"
+              onChange={(p) => handleSort(p)}
+            >
+              <option value="DEFAULT" disabled>
+                In alphabetical order
+              </option>
+              <option value="asc"> A-Z</option>
+              <option value="desc"> Z-A</option>
+            </select>
+            <select
+              defaultValue={"DEFAULT"}
+              className="select"
+              onChange={(p) => handleSortRating(p)}
+            >
+              <option value="DEFAULT" disabled>
+                Rating
+              </option>
+              <option value="rasd">Low Score</option>
+              <option value="hs">High Score</option>
+            </select>
+            <select
+              defaultValue={"sinFiltro"}
+              className="select"
+              onChange={(event) => filterVideogamesByGenre(event)}
+            >
+              <option value="sinFiltro">Genres</option>
+              Genres :{" "}
+              {genres?.map((event, i) => {
+                return (
+                  <option value={event.name} key={i}>
+                    {" "}
+                    {event.name}{" "}
+                  </option>
+                );
+              })}
+            </select>
+            <select
+              defaultValue={"DEFAULT"}
+              className="select"
+              onChange={(p) => handlefilterCreated(p)}
+            >
+              <option value="DEFAULT" disabled>
+                Show Games
+              </option>
+              <option value="all">All games</option>
+              <option value="api">From API</option>
+              <option value="created">Created</option>
+            </select>
+          <button className={style.reset} onClick={handleClick}>Reset</button>
         </div>
       </div>
       <div className="cards-container">
-        <Cards />
+        <Cards/>
       </div>
     </div>
   );
 }
-
+}
 export default Home;

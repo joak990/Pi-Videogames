@@ -13,7 +13,7 @@ function Cards() {
   const [porpagina,setPorpagina] = useState(15)
 
   const maximo = Games.length / porpagina
-  console.log(maximo);
+  
   return (
     <div className={style.containercards}>
      {Games.slice((pagina - 1) * porpagina,

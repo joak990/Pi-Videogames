@@ -1,4 +1,4 @@
-import { CLEAN_DETAIL_VIDEOGAME,DELETE_GAME, FILTER_BY_GENRE, GET_DETAIL, GET_GAMES_BY_NAME, GET_GENRES, GET_PLATFORMS, GET_VIDEO_GAMES, ORDER_BY_NAME, ORDER_BY_RATING, SUBMIT_GAME } from "./Types";
+import { FILTER_CREATED,CLEAN_DETAIL_VIDEOGAME,DELETE_GAME, FILTER_BY_GENRE, GET_DETAIL, GET_GAMES_BY_NAME, GET_GENRES, GET_PLATFORMS, GET_VIDEO_GAMES, ORDER_BY_NAME, ORDER_BY_RATING, SUBMIT_GAME, RESET_FILTERS } from "./Types";
 
 const initialState = {
   videogames: [],
@@ -7,6 +7,7 @@ const initialState = {
   platforms: [],
   resPost: [],
   videoGamesdetails: [],
+  videogamesoriginals:[]
   };
 
 
@@ -18,7 +19,19 @@ export default function rootReducer(state = initialState, action){
     return {
       ...state,
       allVideoGames: action.payload,
+      videogamesoriginals:action.payload,
     };
+    case FILTER_CREATED:        
+    
+        const allGameApiDB = state.allVideoGames;
+        const createFilter =
+          action.payload === "created"
+            ? allGameApiDB.filter((elem) => elem.created)
+            : allGameApiDB.filter((elem) => !elem.created);
+        return {
+          ...state,
+          allVideogames: action.payload === "all" ? allGameApiDB : createFilter,
+        };
 
     case GET_GAMES_BY_NAME:
       return {
@@ -47,7 +60,7 @@ export default function rootReducer(state = initialState, action){
         });
         return {
           ...state,
-          videogames: action.payload === "sinFiltro" ? allStateGames : tempGames,
+          allVideoGames: action.payload === "sinFiltro" ? allStateGames : tempGames,
         };
        
         case SUBMIT_GAME:
@@ -71,11 +84,17 @@ export default function rootReducer(state = initialState, action){
           return{
             ...state
           }
+          case RESET_FILTERS:
+         
+          return{
+              ...state,
+              allVideoGames:[...state.videogamesoriginals]
+            }
 
           case ORDER_BY_NAME:
       let sortedArr =
         action.payload === "asc"
-          ? state.videogames.sort(function (a, b) {
+          ? state.allVideoGames.sort(function (a, b) {
               if (a.name > b.name) {
                 return 1;
               }
@@ -86,7 +105,7 @@ export default function rootReducer(state = initialState, action){
 
               return 0;
             })
-          : state.videogames.sort(function (a, b) {
+          : state.allVideoGames.sort(function (a, b) {
               if (a.name > b.name) {
                 return -1;
               }
@@ -99,12 +118,12 @@ export default function rootReducer(state = initialState, action){
             });
       return {
         ...state,
-        videogames: sortedArr, // paso al estado el ordenamiento
+        allVideoGames: sortedArr, // paso al estado el ordenamiento
       };
       case ORDER_BY_RATING:
         let RsortedArr =
           action.payload === "rasd"
-            ? state.videogames.sort(function (a, b) {
+            ? state.allVideoGames.sort(function (a, b) {
                 if (a.rating > b.rating) {
                   return 1;
                 }
@@ -115,7 +134,7 @@ export default function rootReducer(state = initialState, action){
   
                 return 0;
               })
-            : state.videogames.sort(function (a, b) {
+            : state.allVideoGames.sort(function (a, b) {
                 if (a.rating > b.rating) {
                   return -1;
                 }
@@ -128,7 +147,7 @@ export default function rootReducer(state = initialState, action){
               });
         return {
           ...state,
-          videogames: RsortedArr, // paso al estado el ordenamiento
+          allVideoGames: RsortedArr, // paso al estado el ordenamiento
         };
   default:
     return state

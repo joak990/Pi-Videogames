@@ -20,24 +20,48 @@ return arr.map(e=>{
 })
 }
 
+const cleanArrayDb = (arr) => // esta funcion me ayuda a mostrar info necesaria
+arr.map((elem) => { // este array es el array de videojuegos que viene de la api.
+   return {
+    id: elem.id,
+    name: elem.name,
+    description: elem.description,
+    platforms: elem.platforms,
+    rating: elem.rating,
+    released: elem.released,
+    image: elem.image,
+    
+    created: elem.created
+   };
+   
+}); 
 
- const getallvideogames = async ()=>{
- const dbGames =  await Videogame.findAll({ include: {
-  model: Genre,
-  attributes:["name"], 
-     through: {
-         attributes: [],
-     },
- },
-});
 
-  const url = "https://api.rawg.io/api/games"
-let apigamesraw = (
-  await axios.get(`${url}?key=${KEY_API}`)).data.results
+const getallvideogames = async () => {
+  const URL = `https://api.rawg.io/api/games`;
+  const dbVideogamesRaw = await Videogame.findAll({
+    include: {
+      model: Genre,
+      attributes: ["name"],
+      through: {
+        attributes: [],
+      },
+    },
+  });
+  const dbVideogames = cleanArrayDb(dbVideogamesRaw);
 
-const apigames = cleanArray(apigamesraw)
- return [...dbGames,...apigames]
-}
+  const apiVideogames = [];
+  for (let i = 1; i < 6; i++) {
+    const response = await axios.get(`${URL}?key=${KEY_API}&page=${i}`);
+    const apiVideogamesRaw = response.data.results;
+    apiVideogames.push(...apiVideogamesRaw);
+  }
+  const cleanApiVideogames = cleanArray(apiVideogames);
+ 
+
+  return [...dbVideogames, ...cleanApiVideogames];
+};
+
 
 
 const searchgamebyname = async (name) => {
@@ -50,6 +74,7 @@ const searchgamebyname = async (name) => {
       await axios.get(`${url}?key=${KEY_API}`)
     ).data.results;
     const apigames = cleanArray(apigamesraw);
+    
     const filteredapi = apigames.filter((game)=>game.name.includes(name)
   )
     return [...filteredapi, ...databasegames];
@@ -79,7 +104,10 @@ const getGamesyId = async (id)=>{
             
         }
     } else {
-      const gameDetails = await Videogame.findAll({where: { id }})
+     
+        await Videogame.FindByPk(id,{include: {model: Genre,through:{attributes:["name"],},},},)
+     
+      //const gameDetails = await Videogame.findAll({where: { id }})
       // const game = gameDetails?.videogame?.dataValues
 
       //TODO Tenes que hacer un Get a la base de datos fijate si ese metodo esta bien o si es FindFirst o FindUnique el metodo.

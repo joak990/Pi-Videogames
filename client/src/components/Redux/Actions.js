@@ -12,8 +12,8 @@ import {
     SUBMIT_GAME,
     DELETE_GAME,
     GET_DETAIL,
-   
  CLEAN_DETAIL_VIDEOGAME,
+ RESET_FILTERS
    
     
   
@@ -68,6 +68,7 @@ export function getPlatforms() {
       });
     };
   }
+  
 
 
     
@@ -116,7 +117,7 @@ export function getPlatforms() {
   
 
   export function filterCreated(value) {
-    // console.log(payload)
+    
     return {
       type: FILTER_CREATED,
       payload: value,
@@ -175,6 +176,14 @@ export function getPlatforms() {
       type: CLEAN_DETAIL_VIDEOGAME,
     }
   }
+
+  
+  export function resetfilters(){
+    return {
+      type: RESET_FILTERS,
+    }
+  }
+
   
   
   
