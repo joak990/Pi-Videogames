@@ -3,7 +3,7 @@ import style from "./home.module.css";
 import Cards from "../Cards/Cards";
 import SearchBar from "../SearchBar/SearchBar";
 import { useDispatch, useSelector } from "react-redux";
-import { resetfilters,getVideoGames,orderByName,orderByRating,filterCreated, filterVideogamesByGenre } from "../Redux/Actions";
+import { getGenres,resetfilters,getVideoGames,orderByName,orderByRating,filterCreated, filterVideogamesByGenre, getGenderType } from "../Redux/Actions";
 import Loading from "../Loading/Loading";
 function Home() {
 
@@ -11,12 +11,14 @@ function Home() {
   const [loading, setLoading] = useState(true);
   
   const{ genres, allVideoGames , videogamesoriginals} = useSelector((state) => state);
- 
+ console.log(genres, "test")
   const dispatch = useDispatch();
 
   useEffect(()=> {
     dispatch(getVideoGames());
+    dispatch(getGenres());
   },[])
+
 
   function handleSort(event) {
     event.preventDefault();
@@ -25,8 +27,6 @@ function Home() {
     setOrder(`Ordenado ${event.target.value}`); //es un estado local vacio, lo uso para modif estado local y renderize
   }
   function handleClick() {
-    console.log(videogamesoriginals);
-    console.log(allVideoGames);
    dispatch(resetfilters())
   }
   function handleSortRating(p) {
@@ -39,18 +39,15 @@ function Home() {
     event.preventDefault();
     dispatch(filterCreated(event.target.value));
   }
-  const changeLoading = () => {
-    
-    
-    setTimeout(() => {
-      setLoading(false);
-    }, 1000);
-  };
 
-  if (loading) {
-    changeLoading();
-    return <Loading> cards</Loading>;
-  } else {
+  function handleFilterGamesByGenre(event) {
+    event.preventDefault();
+    dispatch(filterVideogamesByGenre(event.target.value));
+    
+  }
+
+  
+
   return (
     <div className="home">
       <div className={style.topContainer}>
@@ -81,7 +78,7 @@ function Home() {
             <select
               defaultValue={"sinFiltro"}
               className="select"
-              onChange={(event) => filterVideogamesByGenre(event)}
+              onChange={(event) => handleFilterGamesByGenre(event)}
             >
               <option value="sinFiltro">Genres</option>
               Genres :{" "}
@@ -115,5 +112,5 @@ function Home() {
     </div>
   );
 }
-}
+
 export default Home;

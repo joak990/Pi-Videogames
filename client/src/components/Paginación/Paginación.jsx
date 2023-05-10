@@ -31,7 +31,7 @@ function Paginación({pagina,setPagina,maximo}) {
     <div  className={style.containerpag}>
       <button disabled={pagina===1 || pagina < 1 } onChange={e=>Onchange(e)} onClick={prevpage} className={style.buttonpag}>Previous Page</button>
       <input maxMin={e=>maxMin(e)} name='page'autoComplete='off' value={input} className={style.inputpag}  />
-      <p> </p>
+      
       <button disabled={pagina=== Math.ceil(maximo)|| pagina > maximo } onClick={nextpage}  className={style.buttonpag} >Next Page</button>
 
     </div>

@@ -3,10 +3,14 @@ const {createGame,getGamesyId,searchgamebyname,getallvideogames} = require ("../
 
 
 const getVideogamesHandler = async (req,res)=>{
-    const  {name} = req.query
-    
-    const results = name ? await searchgamebyname(name) : await getallvideogames()
+    const {name} = req.query
+    try {
+      const results = name ? await searchgamebyname(name) : await getallvideogames()
    res.status(200).json(results)
+    } catch (error) {
+      res.status(400).json({error:error.message})
+    }
+    
   }
 
 

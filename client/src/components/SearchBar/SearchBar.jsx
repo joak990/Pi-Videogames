@@ -11,12 +11,12 @@ import {getNameVideoGames} from "../Redux/Actions"
   function handleInputChange(e){
     e.preventDefault()
     setName(e.target.value)
-    console.log(name)    
-}
+  } 
 
 
 function handleSubmit(e){
   e.preventDefault()
+  console.log(name)
   dispatch(getNameVideoGames(name))
 
 }
@@ -26,7 +26,10 @@ function handleSubmit(e){
       <input
         className={style.searchinput}
         type="text"
-        placeholder="Search game by name..." onChange={(e)=>handleInputChange(e)}/>
+        placeholder="Search game by name..." 
+        onChange={(event)=>handleInputChange(event)}
+        value={name}
+        />
 
       <button type="submit" className={style.btnsearch}  onClick = {(e)=> handleSubmit(e)}>
         Search

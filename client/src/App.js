@@ -17,7 +17,6 @@ const location = useLocation()
           <Route path="/" element={<LandingPage/>}/>
           <Route path="/home" element={<Home/>}/>
           <Route path="/videogames/:id" element={<Detail/>}/>
-          <Route path="/videogames"/>
           <Route path="/create" element={<Form/>}/>
           <Route path="*" element={<NotFound/>}/>
         </Routes>

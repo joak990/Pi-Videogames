@@ -91,6 +91,9 @@ justify-content: center;
 }
 .descriptionreal{
     color: white;
+    display: flex;
+    text-align: center;
+    justify-content: center;
 }
 
 .containeruls{
@@ -107,11 +110,12 @@ justify-content: center;
     align-items: center;
     font-weight: 300px;
     font-family: fantasy;
+    gap: 20px;
 }
 .platformscontainer{
     display: flex;
     justify-content: center;
-    flex-direction: column;
+ gap: 20px;
 }
 
 .cont{
@@ -180,5 +184,10 @@ font-family: fantasy;
 
 .buttonscontainer:hover {
     background-color: #c0392b;
+  }
+
+  .descriptiondetail{
+    display: flex;
+    justify-content: center;
   }
   

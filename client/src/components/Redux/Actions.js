@@ -10,7 +10,6 @@ import {
     GET_GENRE_TYPES,
     FILTER_CREATED,
     SUBMIT_GAME,
-    DELETE_GAME,
     GET_DETAIL,
  CLEAN_DETAIL_VIDEOGAME,
  RESET_FILTERS
@@ -27,7 +26,7 @@ export function getVideoGames() {
           dispatch({ type: GET_VIDEO_GAMES, payload: response.data });
         })
         .catch(() => {
-          alert("Error");
+          alert("error videogames not found");
         });
     };
   }
@@ -39,8 +38,8 @@ export function getVideoGames() {
         .then((res) => {
           dispatch({ type: GET_GAMES_BY_NAME, payload: res.data });
         })
-        .catch((err) => {
-          return err;
+        .catch(() => {
+         alert("error videogames not found")
         });
     };
   }
@@ -89,20 +88,20 @@ export function getPlatforms() {
   export const getGenderType = () => {
     return async function (dispatch) {
       try {
-        let gt = [];
+        let genderTy = [];
         let json = await axios.get("http://localhost:3001/videogames");
-        let mapper = json.data.map((e) => e.genderTypes);
-        mapper.forEach((a) =>
+        let genres = json.data.map((e) => e.genderTypes);
+        genres.forEach((a) =>
           Array.isArray(a)
-            ? a.forEach((e) => (!gt.includes(e) ? gt.push(e) : e))
+            ? a.forEach((e) => (!genderTy.includes(e) ? genderTy.push(e) : e))
             : a
         );
         return dispatch({
           type: GET_GENRE_TYPES,
-          payload: gt,
+          payload: genderTy,
         });
-      } catch (e) {
-        console.log(e);
+      } catch (error) {
+        alert({error:error.message})
       }
     };
   };
@@ -116,11 +115,11 @@ export function getPlatforms() {
   };
   
 
-  export function filterCreated(value) {
+  export function filterCreated(payload) {
     
     return {
       type: FILTER_CREATED,
-      payload: value,
+      payload
     };
   }
 
@@ -135,8 +134,8 @@ export function getPlatforms() {
           type: SUBMIT_GAME,
           json: json.data,
         };
-      } catch (e) {
-        console.log(e);
+      } catch (error) {
+        alert({error:error.message})
       }
     };
   };
@@ -144,32 +143,19 @@ export function getPlatforms() {
   export const getDetails = (id) => {
     return async function (dispatch) {
       try {
-        console.log("SOY L ID", id)
+       
         const response = await axios.get(`http://localhost:3001/videogames/${id}`);
         return dispatch({
           type: GET_DETAIL,
           payload: response.data,
         });
-      } catch (e) {
-        console.log(e);
+      } catch (error) {
+        alert({error:error.message})
       }
     };
   };
   
-  export function deleteGame(id){
-    return function(dispatch){
-      axios.delete(`http://localhost:3001/videogames/${id}`)
-      .then((response)=>{
-        dispatch({
-          type: DELETE_GAME
-        })
-      })
-      .catch(() => {
-        alert("No se puede borrar");
-      });
-    }
-  }
-
+ 
 
   export function cleanDetail(){
     return {

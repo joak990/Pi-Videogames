@@ -1,11 +1,13 @@
 .containerload{
+   
     display: flex;
     justify-content: center;
-    height: 800px;
-    
+  align-items: center;
 }
 
 .gifload{
-    display: flex;
-    justify-content: center;
+    position: absolute;
+ width: 100%;
+ height:1300px;
+   margin-top: 300px;
 }

@@ -1,20 +1,37 @@
-import {React, useEffect} from 'react'
+import {React, useEffect, useState} from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useParams, NavLink} from 'react-router-dom'
 import { cleanDetail, getDetails } from '../Redux/Actions'
 import style from "./detail.module.css"
+import Loading from "../Loading/Loading";
+
+
 function Detail() {
 
+  const [loading, setLoading] = useState(true);
   const {id}= useParams();
   const dispatch = useDispatch();
   const videogame = useSelector((state)=> state.videoGamesdetails);
- 
   useEffect(()=>{
     dispatch(getDetails(id));
     return ()=>{
         dispatch(cleanDetail())
     }
 },[id, dispatch]);
+
+const changeLoading = () => {
+    
+    
+  setTimeout(() => {
+    setLoading(false);
+  }, 1000);
+};
+
+
+if (loading) {
+  changeLoading();
+  return <Loading></Loading>;
+} else {
   return (
 
     <div className={style.containerdeta}>
@@ -32,7 +49,7 @@ function Detail() {
 
       <h1 className={style.genresdetail}>Genres</h1>
         {videogame.genre?.map((genre, index) => (
-  <div  key={index}>
+  <div key={index}>
     <h2 className={style.namecont}>{genre.name}</h2>
  
   
@@ -70,10 +87,10 @@ function Detail() {
               </NavLink>
               
             </div>
-        <footer>joa</footer>
+        <footer>james</footer>
       </div>
     
   )
 }
-
+}
 export default Detail

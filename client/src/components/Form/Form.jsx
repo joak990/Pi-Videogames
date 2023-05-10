@@ -29,7 +29,7 @@ function Form() {
   }, [dispatch]);
 
   const [errors, setErrors] = useState({
-    name: "",
+    name: "name is required",
     image: "",
     description: "",
     platforms: "",
@@ -57,13 +57,29 @@ function Form() {
     setForm({ ...form, [property]: value });
   };
 
-  function submitHandler(e, res) {
+  function submitHandler(e) {
     try {
       e.preventDefault();
-      dispatch(postVideoGames(form));
-      alert("VideoGame created!!");
+      let isValid = true
+      console.log(Object.values(errors))
+      Object.values(errors).forEach(error => { if(error?.length) { isValid = false }});
+      if(isValid) {
+        dispatch(postVideoGames(form));
+        setForm({
+          name: "",
+          description: "",
+          platforms: [],
+          released: "",
+          rating: "",
+          genres: [],
+          image: "",
+        });
+        alert("videogame created!!");
+      } else {
+        alert("Please fill all required fields to continue.");
+      }
     } catch (error) {
-      alert("Videogame failed to create");
+      alert({error:error.message});
     }
   }
 
@@ -80,8 +96,8 @@ function Form() {
         if (cg?.id === Number(genre)) {
           genresNames.push({
             id: cg?.id,
-            name: cg?.name
-          })
+            name: cg?.name,
+          });
         }
       });
       setSelectedGenres(genresNames);
@@ -91,9 +107,13 @@ function Form() {
   function handleDeleteGenre(e) {
     const parsedGenres = [...form.genre];
     const currentGenres = [...parsedGenres];
-    const newGenres = currentGenres?.filter((g) => { return !g?.includes(e) });
-    const parsedSelectedGenres = [...selectedGenres]
-    const parsedNewSelGen = parsedSelectedGenres?.filter((sg)=> { return newGenres?.includes(String(sg?.id)) })
+    const newGenres = currentGenres?.filter((g) => {
+      return !g?.includes(e);
+    });
+    const parsedSelectedGenres = [...selectedGenres];
+    const parsedNewSelGen = parsedSelectedGenres?.filter((sg) => {
+      return newGenres?.includes(String(sg?.id));
+    });
 
     setForm({ ...form, genre: newGenres });
     setSelectedGenres(parsedNewSelGen);
@@ -134,12 +154,17 @@ function Form() {
         "Description must be between 10 and 500 characters";
     }
     // Genre validation
-    if (!form.genre.length) {
+    if (form.genre.length < 1 ) {
       newErrors.genre = "At least one genre is required";
+   
+    } 
+     
+    if (!form.rating.trim()){
+      newErrors.rating= "rating is required"
     }
     setErrors(newErrors);
   };
-console.log("TEST", selectedGenres)
+
   return (
     <>
       <div className={style.card}>
@@ -153,6 +178,7 @@ console.log("TEST", selectedGenres)
                 type="text"
                 onChange={changeHandler}
                 name="name"
+                autoComplete="off"
               />
               <p className={style.errors}>{errors.name}</p>
               <label>Released date:</label>
@@ -170,9 +196,10 @@ console.log("TEST", selectedGenres)
                 onChange={changeHandler}
                 type="text"
                 name="rating"
-                placeholder="ex 4.3"
+                placeholder="ex 5.1"
+                autoComplete="off"
               />
-
+              <p className={style.errors}>{errors.rating}</p>
               <label className="form-label">Image</label>
               <input
                 type="text"
@@ -244,6 +271,12 @@ console.log("TEST", selectedGenres)
                   );
                 })}
               </div>
+            </div>
+            <div >
+              <label >
+                <input className={style.checkbox} type="checkbox" name="termsAndConditions" required />
+                Acepto los términos y condiciones
+              </label>
             </div>
 
             <div className={style.buttonsContainer}>

@@ -196,11 +196,15 @@
   cursor: pointer;
 }
 
-  .selectedGenres {
-    
-  }
+  
 
   .errors{
     color: #e74c3c;
     background-color: #efc0bb;
+  }
+
+  .checkbox{
+  background-color: red;
+    font-weight: 800px;
+  color: red;
   }

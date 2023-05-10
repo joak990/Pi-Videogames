@@ -3,6 +3,7 @@ import Card from "../Card/Card"
 import style from "./cards.module.css"
 import { useSelector } from 'react-redux'
 import Paginación from '../Paginación/Paginación'
+import Loading from "../Loading/Loading";
 
 
   
@@ -13,10 +14,14 @@ function Cards() {
   const [porpagina,setPorpagina] = useState(15)
 
   const maximo = Games.length / porpagina
-  
+
   return (
     <div className={style.containercards}>
-     {Games.slice((pagina - 1) * porpagina,
+      {
+        !Games?.length ? 
+        <Loading/> : 
+      <>
+           {Games.slice((pagina - 1) * porpagina,
      (pagina -1) * porpagina + porpagina)
      .map(game=>{
       return <Card
@@ -27,7 +32,9 @@ function Cards() {
       image={game.image}
       rating={game.rating}
             />})} 
-    <Paginación pagina={pagina} setPagina={setPagina} maximo={maximo}/>     
+    <Paginación pagina={pagina} setPagina={setPagina} maximo={maximo}/>   
+      </>
+      }  
     </div>
   )
 }
